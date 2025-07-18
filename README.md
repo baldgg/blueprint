@@ -1,3 +1,34 @@
+
+<div align="right">
+  <details>
+    <summary >🌐 Language</summary>
+    <div>
+      <div align="center">
+        <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=en">English</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=zh-CN">简体中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=zh-TW">繁體中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=ja">日本語</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=ko">한국어</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=hi">हिन्दी</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=th">ไทย</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=fr">Français</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=de">Deutsch</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=es">Español</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=it">Itapano</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=ru">Русский</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=pt">Português</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=nl">Nederlands</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=pl">Polski</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=ar">العربية</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=fa">فارسی</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=tr">Türkçe</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=vi">Tiếng Việt</a>
+        | <a href="https://openaitx.github.io/view.html?user=baldgg&project=blueprint&lang=id">Bahasa Indonesia</a>
+      </div>
+    </div>
+  </details>
+</div>
+
 If you'd like to learn how to use this to make games, [go here](https://learn.randy.gg/?src=template-starter)
 
 If you want some free value like this blueprint delivered to your inbox every now and then, checkout [my mailing list](https://path.randy.gg)
