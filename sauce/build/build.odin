@@ -108,7 +108,11 @@ main :: proc() {
 		}
 		// not needed, it's easier to just generate code into generated.odin
 		//append(&c, fmt.tprintf("-define:TARGET_STRING=%v", target))
-		utils.fire(..c[:])
+
+		err := utils.fire(..c[:])
+		if err != nil{
+			log.error("Build error.")
+		}
 	}
 
 	// copy stuff into folder

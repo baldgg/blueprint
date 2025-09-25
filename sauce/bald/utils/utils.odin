@@ -105,12 +105,15 @@ fire :: proc(cmd: ..string) -> os2.Error {
 		return start_err
 	}
 
-	_, wait_err := os2.process_wait(process)
+	process2, wait_err := os2.process_wait(process)
 	if wait_err != nil {
 		fmt.eprintln("Error:", wait_err) 
 		return wait_err
 	}
-
+	if process2.exit_code != 0{
+		fmt.eprintln("Error: executed command exit code", process2.exit_code)
+		return os2.General_Error.Unsupported
+	}
 	return nil
 }
 
