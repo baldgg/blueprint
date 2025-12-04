@@ -162,13 +162,20 @@ main :: proc() {
 			append(&files_to_copy, "sauce/fmod/core/lib/darwin/libfmod.dylib")
 			append(&files_to_copy, "sauce/fmod/core/lib/darwin/libfmodL.dylib")
 		case .linux:
-		//TODO: linux fmod support
+			append(&files_to_copy, "sauce/fmod/studio/lib/linux/libfmodstudio.so")
+			append(&files_to_copy, "sauce/fmod/studio/lib/linux/libfmodstudio.so.13")
+			append(&files_to_copy, "sauce/fmod/studio/lib/linux/libfmodstudioL.so")
+			append(&files_to_copy, "sauce/fmod/studio/lib/linux/libfmodstudioL.so.13")
+			append(&files_to_copy, "sauce/fmod/core/lib/linux/libfmod.so")
+			append(&files_to_copy, "sauce/fmod/core/lib/linux/libfmod.so.13")
+			append(&files_to_copy, "sauce/fmod/core/lib/linux/libfmodL.so")
+			append(&files_to_copy, "sauce/fmod/core/lib/linux/libfmodL.so.13")
 		}
 
 		for src in files_to_copy {
 			dir, file_name := path.split(src)
 			assert(os.exists(dir), fmt.tprint("directory doesn't exist:", dir))
-			dest := fmt.tprintf("%v/%v", out_dir, file_name)
+			dest := path.join({out_dir, file_name})
 			if !os.exists(dest) {
 				os2.copy_file(dest, src)
 			}

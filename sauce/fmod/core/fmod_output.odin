@@ -1,4 +1,3 @@
-#+build windows
 package fmod_core
 
 /* ======================================================================================== */
@@ -33,12 +32,12 @@ OUTPUT_METHOD :: enum u32 {
 // Output callbacks
 //
 
-OUTPUT_GETNUMDRIVERS_CALLBACK :: #type proc "stdcall" (
+OUTPUT_GETNUMDRIVERS_CALLBACK :: #type proc "cdecl" (
     output_state: ^OUTPUT_STATE,
     numdrivers: ^i32,
 ) -> RESULT
 
-OUTPUT_GETDRIVERINFO_CALLBACK :: #type proc "stdcall" (
+OUTPUT_GETDRIVERINFO_CALLBACK :: #type proc "cdecl" (
     output_state: ^OUTPUT_STATE,
     id: i32,
     name: [^]u8,
@@ -49,7 +48,7 @@ OUTPUT_GETDRIVERINFO_CALLBACK :: #type proc "stdcall" (
     speakermodechannels: ^i32,
 ) -> RESULT
 
-OUTPUT_INIT_CALLBACK :: #type proc "stdcall" (
+OUTPUT_INIT_CALLBACK :: #type proc "cdecl" (
     output_state: ^OUTPUT_STATE,
     selecteddriver: i32,
     flags: INITFLAGS,
@@ -63,35 +62,35 @@ OUTPUT_INIT_CALLBACK :: #type proc "stdcall" (
     extradriverdata: rawptr,
 ) -> RESULT
 
-OUTPUT_START_CALLBACK :: #type proc "stdcall" (output_state: ^OUTPUT_STATE) -> RESULT
-OUTPUT_STOP_CALLBACK :: #type proc "stdcall" (output_state: ^OUTPUT_STATE) -> RESULT
-OUTPUT_CLOSE_CALLBACK :: #type proc "stdcall" (output_state: ^OUTPUT_STATE) -> RESULT
-OUTPUT_UPDATE_CALLBACK :: #type proc "stdcall" (output_state: ^OUTPUT_STATE) -> RESULT
-OUTPUT_GETHANDLE_CALLBACK :: #type proc "stdcall" (output_state: ^OUTPUT_STATE, handle: ^rawptr) -> RESULT
-OUTPUT_MIXER_CALLBACK :: #type proc "stdcall" (output_state: ^OUTPUT_STATE) -> RESULT
+OUTPUT_START_CALLBACK :: #type proc "cdecl" (output_state: ^OUTPUT_STATE) -> RESULT
+OUTPUT_STOP_CALLBACK :: #type proc "cdecl" (output_state: ^OUTPUT_STATE) -> RESULT
+OUTPUT_CLOSE_CALLBACK :: #type proc "cdecl" (output_state: ^OUTPUT_STATE) -> RESULT
+OUTPUT_UPDATE_CALLBACK :: #type proc "cdecl" (output_state: ^OUTPUT_STATE) -> RESULT
+OUTPUT_GETHANDLE_CALLBACK :: #type proc "cdecl" (output_state: ^OUTPUT_STATE, handle: ^rawptr) -> RESULT
+OUTPUT_MIXER_CALLBACK :: #type proc "cdecl" (output_state: ^OUTPUT_STATE) -> RESULT
 
-OUTPUT_OBJECT3DGETINFO_CALLBACK :: #type proc "stdcall" (
+OUTPUT_OBJECT3DGETINFO_CALLBACK :: #type proc "cdecl" (
     output_state: ^OUTPUT_STATE,
     maxhardwareobjects: ^i32,
 ) -> RESULT
 
-OUTPUT_OBJECT3DALLOC_CALLBACK :: #type proc "stdcall" (
+OUTPUT_OBJECT3DALLOC_CALLBACK :: #type proc "cdecl" (
     output_state: ^OUTPUT_STATE,
     object3d: ^rawptr,
 ) -> RESULT
 
-OUTPUT_OBJECT3DFREE_CALLBACK :: #type proc "stdcall" (
+OUTPUT_OBJECT3DFREE_CALLBACK :: #type proc "cdecl" (
     output_state: ^OUTPUT_STATE,
     object3d: rawptr,
 ) -> RESULT
 
-OUTPUT_OBJECT3DUPDATE_CALLBACK :: #type proc "stdcall" (
+OUTPUT_OBJECT3DUPDATE_CALLBACK :: #type proc "cdecl" (
     output_state: ^OUTPUT_STATE,
     object3d: rawptr,
     #by_ptr info: OUTPUT_OBJECT3DINFO,
 ) -> RESULT
 
-OUTPUT_OPENPORT_CALLBACK :: #type proc "stdcall" (
+OUTPUT_OPENPORT_CALLBACK :: #type proc "cdecl" (
     output_state: ^OUTPUT_STATE,
     portType: PORT_TYPE,
     portIndex: PORT_INDEX,
@@ -101,27 +100,27 @@ OUTPUT_OPENPORT_CALLBACK :: #type proc "stdcall" (
     portFormat: ^SOUND_FORMAT,
 ) -> RESULT
 
-OUTPUT_CLOSEPORT_CALLBACK :: #type proc "stdcall" (output_state: ^OUTPUT_STATE, portId: i32) -> RESULT
-OUTPUT_DEVICELISTCHANGED_CALLBACK :: #type proc "stdcall" (output_state: ^OUTPUT_STATE) -> RESULT
+OUTPUT_CLOSEPORT_CALLBACK :: #type proc "cdecl" (output_state: ^OUTPUT_STATE, portId: i32) -> RESULT
+OUTPUT_DEVICELISTCHANGED_CALLBACK :: #type proc "cdecl" (output_state: ^OUTPUT_STATE) -> RESULT
 
-OUTPUT_READFROMMIXER_FUNC :: #type proc "stdcall" (
+OUTPUT_READFROMMIXER_FUNC :: #type proc "cdecl" (
     output_state: ^OUTPUT_STATE,
     buffer: rawptr,
     length: u32,
 ) -> RESULT
 
-OUTPUT_COPYPORT_FUNC :: #type proc "stdcall" (
+OUTPUT_COPYPORT_FUNC :: #type proc "cdecl" (
     output_state: ^OUTPUT_STATE,
     portId: i32,
     buffer: rawptr,
     length: u32,
 ) -> RESULT
 
-OUTPUT_REQUESTRESET_FUNC :: #type proc "stdcall" (output_state: ^OUTPUT_STATE) -> RESULT
-OUTPUT_ALLOC_FUNC :: #type proc "stdcall" (size: u32, align: u32, file: cstring, line: i32) -> rawptr
-OUTPUT_FREE_FUNC :: #type proc "stdcall" (ptr: rawptr, file: cstring, line: i32)
+OUTPUT_REQUESTRESET_FUNC :: #type proc "cdecl" (output_state: ^OUTPUT_STATE) -> RESULT
+OUTPUT_ALLOC_FUNC :: #type proc "cdecl" (size: u32, align: u32, file: cstring, line: i32) -> rawptr
+OUTPUT_FREE_FUNC :: #type proc "cdecl" (ptr: rawptr, file: cstring, line: i32)
 
-OUTPUT_LOG_FUNC :: #type proc "stdcall" (
+OUTPUT_LOG_FUNC :: #type proc "cdecl" (
     level: DEBUG_FLAGS,
     file: cstring,
     line: i32,

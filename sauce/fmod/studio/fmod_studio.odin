@@ -1,4 +1,3 @@
-#+build windows
 package fmod_studio
 
 /* ======================================================================================== */
@@ -21,6 +20,23 @@ when ODIN_OS == .Windows {
         foreign import lib "lib/windows/x64/fmodstudio_vc.lib"
     }
 }
+
+when ODIN_OS == .Darwin {
+    when fmod.LOGGING_ENABLED {
+        foreign import lib "lib/darwin/libfmodstudioL.dylib"
+    } else {
+        foreign import lib "lib/darwin/libfmodstudio.dylib"
+    }
+}
+
+when ODIN_OS == .Linux {
+    when fmod.LOGGING_ENABLED {
+        foreign import lib "lib/linux/libfmodstudioL.so"
+    } else {
+        foreign import lib "lib/linux/libfmodstudio.so"
+    }
+}
+
 @(default_calling_convention = "c", link_prefix = "FMOD_Studio_")
 foreign lib {
 

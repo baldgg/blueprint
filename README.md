@@ -61,7 +61,10 @@ I get that some people prefer to be linux or mac chads though. It's relatively s
 4. see instructions below for running
 
 ## Linux
-todo
+1. [install Odin](https://odin-lang.org/docs/install/)
+2. call 'build_linux.sh'
+3. check 'build/linux_debug'
+4. see instructions below for running
 
 ## Web
 coming soon™️
