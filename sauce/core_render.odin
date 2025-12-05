@@ -64,11 +64,10 @@ render_init :: proc() {
 	load_font()
 
 	// make the vertex buffer
-	render_state.bind.vertex_buffers[0] = sg.make_buffer({
-		usage = .DYNAMIC,
-		size = size_of(actual_quad_data),
-	})
-	
+	render_state.bind.vertex_buffers[0] = sg.make_buffer(
+		{usage = {dynamic_update = true}, size = size_of(actual_quad_data)},
+	)
+
 	// make & fill the index buffer
 	index_buffer_count :: MAX_QUADS*6
 	indices,_ := mem.make([]u16, index_buffer_count, allocator=context.allocator)
@@ -84,11 +83,13 @@ render_init :: proc() {
 		indices[i + 5] = auto_cast ((i/6)*4 + 3)
 		i += 6;
 	}
-	render_state.bind.index_buffer = sg.make_buffer({
-		type = .INDEXBUFFER,
-		data = { ptr = raw_data(indices), size = size_of(u16) * index_buffer_count },
-	})
-	
+	render_state.bind.index_buffer = sg.make_buffer(
+		{
+			usage = {index_buffer = true},
+			data = {ptr = raw_data(indices), size = size_of(u16) * index_buffer_count},
+		},
+	)
+
 	// image stuff
 	render_state.bind.samplers[SMP_default_sampler] = sg.make_sampler({})
 	
@@ -152,8 +153,9 @@ core_render_frame_end :: proc() {
 		}
 	}
 	
-	render_state.bind.images[IMG_tex0] = atlas.sg_image
-	render_state.bind.images[IMG_font_tex] = font.sg_image
+
+	render_state.bind.views[VIEW_tex0] = atlas.sg_view
+	render_state.bind.views[VIEW_font_tex] = font.sg_view
 
 	{
 		sg.update_buffer(
@@ -292,18 +294,22 @@ load_sprites_into_atlas :: proc() {
 		desc.width = auto_cast atlas.w
 		desc.height = auto_cast atlas.h
 		desc.pixel_format = .RGBA8
-		desc.data.subimage[0][0] = {ptr=raw_data, size=auto_cast (atlas.w*atlas.h*4)}
-		atlas.sg_image = sg.make_image(desc)
-		if atlas.sg_image.id == sg.INVALID_ID {
+		desc.data.mip_levels[0] = {
+			ptr  = raw_data,
+			size = auto_cast (atlas.w * atlas.h * 4),
+		}
+		sg_img := sg.make_image(desc)
+		if sg_img.id == sg.INVALID_ID {
 			log.error("failed to make image")
 		}
+		atlas.sg_view = sg.make_view({texture = sg.Texture_View_Desc({image = sg_img})})
 	}
 }
 // We're hardcoded to use just 1 atlas now since I don't think we'll need more
 // It would be easy enough to extend though. Just add in more texture slots in the shader
 Atlas :: struct {
 	w, h: int,
-	sg_image: sg.Image,
+	sg_view: sg.View,
 }
 atlas: Atlas
 
@@ -313,7 +319,7 @@ font_bitmap_h :: 256
 char_count :: 96
 Font :: struct {
 	char_data: [char_count]tt.bakedchar,
-	sg_image: sg.Image,
+	sg_view:   sg.View,
 }
 font: Font
 // note, this is hardcoded to just be a single font for now. I haven't had the need for multiple fonts yet.
@@ -339,13 +345,15 @@ load_font :: proc() {
 	desc.width = auto_cast font_bitmap_w
 	desc.height = auto_cast font_bitmap_h
 	desc.pixel_format = .R8
-	desc.data.subimage[0][0] = {ptr=bitmap, size=auto_cast (font_bitmap_w*font_bitmap_h)}
+	desc.data.mip_levels[0] = {
+		ptr  = bitmap,
+		size = auto_cast (font_bitmap_w * font_bitmap_h),
+	}
 	sg_img := sg.make_image(desc)
 	if sg_img.id == sg.INVALID_ID {
 		log.error("failed to make image")
 	}
-
-	font.sg_image = sg_img
+	font.sg_view = sg.make_view({texture = sg.Texture_View_Desc({image = sg_img})})
 }
 
 

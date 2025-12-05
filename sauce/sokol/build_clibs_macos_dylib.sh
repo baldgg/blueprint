@@ -16,8 +16,8 @@ build_lib_release() {
         frameworks="${frameworks} ${FRAMEWORKS_OPENGL}"
     fi
     echo $dst
-    MACOSX_DEPLOYMENT_TARGET=10.13 cc -c -O2 -x objective-c -arch $arch -DNDEBUG -DIMPL -D$backend c/$src.c
-    cc -dynamiclib -arch $arch $FRAMEWORKS_CORE $frameworks -o $dst.dylib $src.o $dep
+    MACOSX_DEPLOYMENT_TARGET=10.13 clang -c -O2 -x objective-c -arch $arch -DNDEBUG -DIMPL -D$backend c/$src.c
+    clang -dynamiclib -arch $arch $FRAMEWORKS_CORE $frameworks -o $dst.dylib $src.o $dep
 }
 
 build_lib_debug() {
@@ -32,8 +32,8 @@ build_lib_debug() {
         frameworks="${frameworks} ${FRAMEWORKS_OPENGL}"
     fi
     echo $dst
-    MACOSX_DEPLOYMENT_TARGET=10.13 cc -c -g -x objective-c -arch $arch -DIMPL -D$backend c/$src.c
-    cc -dynamiclib -arch $arch $FRAMEWORKS_CORE $frameworks -o $dst.dylib $src.o $dep
+    MACOSX_DEPLOYMENT_TARGET=10.13 clang -c -g -x objective-c -arch $arch -DIMPL -D$backend c/$src.c
+    clang -dynamiclib -arch $arch $FRAMEWORKS_CORE $frameworks -o $dst.dylib $src.o $dep
 }
 
 mkdir -p dylib
