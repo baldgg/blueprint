@@ -1,4 +1,3 @@
-#+build windows
 package fmod_core
 
 /* ======================================================================================== */
@@ -34,47 +33,47 @@ CODEC_SEEK_METHOD :: enum i32 {
 // Codec callbacks
 //
 
-CODEC_OPEN_CALLBACK :: #type proc "stdcall" (
+CODEC_OPEN_CALLBACK :: #type proc "cdecl" (
     codec_state: ^CODEC_STATE,
     usermode: MODE,
     userexinfo: ^CREATESOUNDEXINFO,
 ) -> RESULT
 
-CODEC_CLOSE_CALLBACK :: #type proc "stdcall" (codec_state: ^CODEC_STATE) -> RESULT
+CODEC_CLOSE_CALLBACK :: #type proc "cdecl" (codec_state: ^CODEC_STATE) -> RESULT
 
-CODEC_READ_CALLBACK :: #type proc "stdcall" (
+CODEC_READ_CALLBACK :: #type proc "cdecl" (
     codec_state: ^CODEC_STATE,
     buffer: rawptr,
     samples_in: u32,
     samples_out: ^u32,
 ) -> RESULT
 
-CODEC_GETLENGTH_CALLBACK :: #type proc "stdcall" (
+CODEC_GETLENGTH_CALLBACK :: #type proc "cdecl" (
     codec_state: ^CODEC_STATE,
     length: ^u32,
     lengthtype: TIMEUNIT,
 ) -> RESULT
 
-CODEC_SETPOSITION_CALLBACK :: #type proc "stdcall" (
+CODEC_SETPOSITION_CALLBACK :: #type proc "cdecl" (
     codec_state: ^CODEC_STATE,
     subsound: i32,
     position: u32,
     postype: TIMEUNIT,
 ) -> RESULT
 
-CODEC_GETPOSITION_CALLBACK :: #type proc "stdcall" (
+CODEC_GETPOSITION_CALLBACK :: #type proc "cdecl" (
     codec_state: ^CODEC_STATE,
     position: ^u32,
     postype: TIMEUNIT,
 ) -> RESULT
 
-CODEC_SOUNDCREATE_CALLBACK :: #type proc "stdcall" (
+CODEC_SOUNDCREATE_CALLBACK :: #type proc "cdecl" (
     codec_state: ^CODEC_STATE,
     subsound: i32,
     sound: ^SOUND,
 ) -> RESULT
 
-CODEC_GETWAVEFORMAT_CALLBACK :: #type proc "stdcall" (
+CODEC_GETWAVEFORMAT_CALLBACK :: #type proc "cdecl" (
     codec_state: ^CODEC_STATE,
     index: i32,
     waveformat: ^CODEC_WAVEFORMAT,
@@ -86,7 +85,7 @@ CODEC_GETWAVEFORMAT_CALLBACK :: #type proc "stdcall" (
 // Codec functions
 //
 
-CODEC_METADATA_FUNC :: #type proc "stdcall" (
+CODEC_METADATA_FUNC :: #type proc "cdecl" (
     codec_state: ^CODEC_STATE,
     tagtype: TAGTYPE,
     name: [^]u8,
@@ -96,10 +95,10 @@ CODEC_METADATA_FUNC :: #type proc "stdcall" (
     unique: i32,
 ) -> RESULT
 
-CODEC_ALLOC_FUNC :: #type proc "stdcall" (size: u32, align: u32, file: cstring, line: i32) -> rawptr
-CODEC_FREE_FUNC :: #type proc "stdcall" (ptr: rawptr, file: cstring, line: i32)
+CODEC_ALLOC_FUNC :: #type proc "cdecl" (size: u32, align: u32, file: cstring, line: i32) -> rawptr
+CODEC_FREE_FUNC :: #type proc "cdecl" (ptr: rawptr, file: cstring, line: i32)
 
-CODEC_LOG_FUNC :: #type proc "stdcall" (
+CODEC_LOG_FUNC :: #type proc "cdecl" (
     level: DEBUG_FLAGS,
     file: cstring,
     line: i32,
@@ -108,21 +107,21 @@ CODEC_LOG_FUNC :: #type proc "stdcall" (
     #c_vararg args: ..any,
 )
 
-CODEC_FILE_READ_FUNC :: #type proc "stdcall" (
+CODEC_FILE_READ_FUNC :: #type proc "cdecl" (
     codec_state: ^CODEC_STATE,
     buffer: rawptr,
     sizebytes: u32,
     bytesread: ^u32,
 ) -> RESULT
 
-CODEC_FILE_SEEK_FUNC :: #type proc "stdcall" (
+CODEC_FILE_SEEK_FUNC :: #type proc "cdecl" (
     codec_state: ^CODEC_STATE,
     pos: u32,
     method: CODEC_SEEK_METHOD,
 ) -> RESULT
 
-CODEC_FILE_TELL_FUNC :: #type proc "stdcall" (codec_state: ^CODEC_STATE, pos: ^u32) -> RESULT
-CODEC_FILE_SIZE_FUNC :: #type proc "stdcall" (codec_state: ^CODEC_STATE, size: ^u32) -> RESULT
+CODEC_FILE_TELL_FUNC :: #type proc "cdecl" (codec_state: ^CODEC_STATE, pos: ^u32) -> RESULT
+CODEC_FILE_SIZE_FUNC :: #type proc "cdecl" (codec_state: ^CODEC_STATE, size: ^u32) -> RESULT
 
 
 

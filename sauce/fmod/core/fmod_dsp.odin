@@ -1,4 +1,3 @@
-#+build windows
 package fmod_core
 
 /* ======================================================================================== */
@@ -61,13 +60,13 @@ DSP_PARAMETER_DATA_TYPE :: enum i32 {
 // DSP Callbacks
 //
 
-DSP_CREATE_CALLBACK :: #type proc "stdcall" (dsp_state: ^DSP_STATE) -> RESULT
+DSP_CREATE_CALLBACK :: #type proc "cdecl" (dsp_state: ^DSP_STATE) -> RESULT
 
-DSP_RELEASE_CALLBACK :: #type proc "stdcall" (dsp_state: ^DSP_STATE) -> RESULT
+DSP_RELEASE_CALLBACK :: #type proc "cdecl" (dsp_state: ^DSP_STATE) -> RESULT
 
-DSP_RESET_CALLBACK :: #type proc "stdcall" (dsp_state: ^DSP_STATE) -> RESULT
+DSP_RESET_CALLBACK :: #type proc "cdecl" (dsp_state: ^DSP_STATE) -> RESULT
 
-DSP_READ_CALLBACK :: #type proc "stdcall" (
+DSP_READ_CALLBACK :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     inbuffer: ^f32,
     outbuffer: ^f32,
@@ -76,7 +75,7 @@ DSP_READ_CALLBACK :: #type proc "stdcall" (
     outchannels: ^i32,
 ) -> RESULT
 
-DSP_PROCESS_CALLBACK :: #type proc "stdcall" (
+DSP_PROCESS_CALLBACK :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     length: u32,
     #by_ptr inbufferarray: DSP_BUFFER_ARRAY,
@@ -85,9 +84,9 @@ DSP_PROCESS_CALLBACK :: #type proc "stdcall" (
     op: DSP_PROCESS_OPERATION,
 ) -> RESULT
 
-DSP_SETPOSITION_CALLBACK :: #type proc "stdcall" (dsp_state: ^DSP_STATE, pos: u32) -> RESULT
+DSP_SETPOSITION_CALLBACK :: #type proc "cdecl" (dsp_state: ^DSP_STATE, pos: u32) -> RESULT
 
-DSP_SHOULDIPROCESS_CALLBACK :: #type proc "stdcall" (
+DSP_SHOULDIPROCESS_CALLBACK :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     inputsidle: b32,
     length: u32,
@@ -96,41 +95,41 @@ DSP_SHOULDIPROCESS_CALLBACK :: #type proc "stdcall" (
     speakermode: SPEAKERMODE,
 ) -> RESULT
 
-DSP_SETPARAM_FLOAT_CALLBACK :: #type proc "stdcall" (dsp_state: ^DSP_STATE, index: i32, value: f32) -> RESULT
+DSP_SETPARAM_FLOAT_CALLBACK :: #type proc "cdecl" (dsp_state: ^DSP_STATE, index: i32, value: f32) -> RESULT
 
-DSP_SETPARAM_INT_CALLBACK :: #type proc "stdcall" (dsp_state: ^DSP_STATE, index: i32, value: i32) -> RESULT
+DSP_SETPARAM_INT_CALLBACK :: #type proc "cdecl" (dsp_state: ^DSP_STATE, index: i32, value: i32) -> RESULT
 
-DSP_SETPARAM_BOOL_CALLBACK :: #type proc "stdcall" (dsp_state: ^DSP_STATE, index: i32, value: b32) -> RESULT
+DSP_SETPARAM_BOOL_CALLBACK :: #type proc "cdecl" (dsp_state: ^DSP_STATE, index: i32, value: b32) -> RESULT
 
-DSP_SETPARAM_DATA_CALLBACK :: #type proc "stdcall" (
+DSP_SETPARAM_DATA_CALLBACK :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     index: i32,
     data: rawptr,
     length: u32,
 ) -> RESULT
 
-DSP_GETPARAM_FLOAT_CALLBACK :: #type proc "stdcall" (
+DSP_GETPARAM_FLOAT_CALLBACK :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     index: i32,
     value: ^f32,
     valuestr: [^]u8,
 ) -> RESULT
 
-DSP_GETPARAM_INT_CALLBACK :: #type proc "stdcall" (
+DSP_GETPARAM_INT_CALLBACK :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     index: i32,
     value: ^i32,
     valuestr: [^]u8,
 ) -> RESULT
 
-DSP_GETPARAM_BOOL_CALLBACK :: #type proc "stdcall" (
+DSP_GETPARAM_BOOL_CALLBACK :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     index: i32,
     value: b32,
     valuestr: [^]u8,
 ) -> RESULT
 
-DSP_GETPARAM_DATA_CALLBACK :: #type proc "stdcall" (
+DSP_GETPARAM_DATA_CALLBACK :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     index: i32,
     data: ^rawptr,
@@ -138,11 +137,11 @@ DSP_GETPARAM_DATA_CALLBACK :: #type proc "stdcall" (
     valuestr: [^]u8,
 ) -> RESULT
 
-DSP_SYSTEM_REGISTER_CALLBACK :: #type proc "stdcall" (dsp_state: ^DSP_STATE) -> RESULT
+DSP_SYSTEM_REGISTER_CALLBACK :: #type proc "cdecl" (dsp_state: ^DSP_STATE) -> RESULT
 
-DSP_SYSTEM_DEREGISTER_CALLBACK :: #type proc "stdcall" (dsp_state: ^DSP_STATE) -> RESULT
+DSP_SYSTEM_DEREGISTER_CALLBACK :: #type proc "cdecl" (dsp_state: ^DSP_STATE) -> RESULT
 
-DSP_SYSTEM_MIX_CALLBACK :: #type proc "stdcall" (dsp_state: ^DSP_STATE, stage: i32) -> RESULT
+DSP_SYSTEM_MIX_CALLBACK :: #type proc "cdecl" (dsp_state: ^DSP_STATE, stage: i32) -> RESULT
 
 
 
@@ -151,18 +150,18 @@ DSP_SYSTEM_MIX_CALLBACK :: #type proc "stdcall" (dsp_state: ^DSP_STATE, stage: i
 //
 
 
-DSP_ALLOC_FUNC :: #type proc "stdcall" (size: u32, type: MEMORY_TYPE, sourcestr: cstring) -> rawptr
+DSP_ALLOC_FUNC :: #type proc "cdecl" (size: u32, type: MEMORY_TYPE, sourcestr: cstring) -> rawptr
 
-DSP_REALLOC_FUNC :: #type proc "stdcall" (
+DSP_REALLOC_FUNC :: #type proc "cdecl" (
     ptr: rawptr,
     size: u32,
     type: MEMORY_TYPE,
     sourcestr: cstring,
 ) -> rawptr
 
-DSP_FREE_FUNC :: #type proc "stdcall" (ptr: rawptr, type: MEMORY_TYPE, sourcestr: cstring)
+DSP_FREE_FUNC :: #type proc "cdecl" (ptr: rawptr, type: MEMORY_TYPE, sourcestr: cstring)
 
-DSP_LOG_FUNC :: #type proc "stdcall" (
+DSP_LOG_FUNC :: #type proc "cdecl" (
     level: DEBUG_FLAGS,
     file: cstring,
     line: i32,
@@ -171,31 +170,31 @@ DSP_LOG_FUNC :: #type proc "stdcall" (
     #c_vararg args: ..any,
 )
 
-DSP_GETSAMPLERATE_FUNC :: #type proc "stdcall" (dsp_state: ^DSP_STATE, rate: ^i32) -> RESULT
-DSP_GETBLOCKSIZE_FUNC :: #type proc "stdcall" (dsp_state: ^DSP_STATE, blocksize: ^u32) -> RESULT
+DSP_GETSAMPLERATE_FUNC :: #type proc "cdecl" (dsp_state: ^DSP_STATE, rate: ^i32) -> RESULT
+DSP_GETBLOCKSIZE_FUNC :: #type proc "cdecl" (dsp_state: ^DSP_STATE, blocksize: ^u32) -> RESULT
 
-DSP_GETSPEAKERMODE_FUNC :: #type proc "stdcall" (
+DSP_GETSPEAKERMODE_FUNC :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     speakermode_mixer: ^SPEAKERMODE,
     speakermode_output: ^SPEAKERMODE,
 ) -> RESULT
 
-DSP_GETCLOCK_FUNC :: #type proc "stdcall" (
+DSP_GETCLOCK_FUNC :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     clock: ^uint,
     offset: ^u32,
     length: ^u32,
 ) -> RESULT
 
-DSP_GETLISTENERATTRIBUTES_FUNC :: #type proc "stdcall" (
+DSP_GETLISTENERATTRIBUTES_FUNC :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     numlisteners: ^i32,
     attributes: ^_3D_ATTRIBUTES,
 ) -> RESULT
 
-DSP_GETUSERDATA_FUNC :: #type proc "stdcall" (dsp_state: ^DSP_STATE, userdata: ^rawptr) -> RESULT
+DSP_GETUSERDATA_FUNC :: #type proc "cdecl" (dsp_state: ^DSP_STATE, userdata: ^rawptr) -> RESULT
 
-DSP_DFT_FFTREAL_FUNC :: #type proc "stdcall" (
+DSP_DFT_FFTREAL_FUNC :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     size: i32,
     #by_ptr signal: f32,
@@ -204,7 +203,7 @@ DSP_DFT_FFTREAL_FUNC :: #type proc "stdcall" (
     signalhop: i32,
 ) -> RESULT
 
-DSP_DFT_IFFTREAL_FUNC :: #type proc "stdcall" (
+DSP_DFT_IFFTREAL_FUNC :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     size: i32,
     #by_ptr dft: COMPLEX,
@@ -213,7 +212,7 @@ DSP_DFT_IFFTREAL_FUNC :: #type proc "stdcall" (
     signalhop: i32,
 ) -> RESULT
 
-DSP_PAN_SUMMONOMATRIX_FUNC :: #type proc "stdcall" (
+DSP_PAN_SUMMONOMATRIX_FUNC :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     sourceSpeakerMode: SPEAKERMODE,
     lowFrequencyGain: f32,
@@ -221,7 +220,7 @@ DSP_PAN_SUMMONOMATRIX_FUNC :: #type proc "stdcall" (
     _matrix: ^f32,
 ) -> RESULT
 
-DSP_PAN_SUMSTEREOMATRIX_FUNC :: #type proc "stdcall" (
+DSP_PAN_SUMSTEREOMATRIX_FUNC :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     sourceSpeakerMode: SPEAKERMODE,
     pan: f32,
@@ -231,7 +230,7 @@ DSP_PAN_SUMSTEREOMATRIX_FUNC :: #type proc "stdcall" (
     _matrix: ^f32,
 ) -> RESULT
 
-DSP_PAN_SUMSURROUNDMATRIX_FUNC :: #type proc "stdcall" (
+DSP_PAN_SUMSURROUNDMATRIX_FUNC :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     sourceSpeakerMode: SPEAKERMODE,
     targetSpeakerMode: SPEAKERMODE,
@@ -245,7 +244,7 @@ DSP_PAN_SUMSURROUNDMATRIX_FUNC :: #type proc "stdcall" (
     flags: DSP_PAN_SURROUND_FLAGS,
 ) -> RESULT
 
-DSP_PAN_SUMMONOTOSURROUNDMATRIX_FUNC :: #type proc "stdcall" (
+DSP_PAN_SUMMONOTOSURROUNDMATRIX_FUNC :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     targetSpeakerMode: SPEAKERMODE,
     direction: f32,
@@ -256,7 +255,7 @@ DSP_PAN_SUMMONOTOSURROUNDMATRIX_FUNC :: #type proc "stdcall" (
     _matrix: ^f32,
 ) -> RESULT
 
-DSP_PAN_SUMSTEREOTOSURROUNDMATRIX_FUNC :: #type proc "stdcall" (
+DSP_PAN_SUMSTEREOTOSURROUNDMATRIX_FUNC :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     targetSpeakerMode: SPEAKERMODE,
     direction: f32,
@@ -268,7 +267,7 @@ DSP_PAN_SUMSTEREOTOSURROUNDMATRIX_FUNC :: #type proc "stdcall" (
     _matrix: ^f32,
 ) -> RESULT
 
-DSP_PAN_GETROLLOFFGAIN_FUNC :: #type proc "stdcall" (
+DSP_PAN_GETROLLOFFGAIN_FUNC :: #type proc "cdecl" (
     dsp_state: ^DSP_STATE,
     rolloff: DSP_PAN_3D_ROLLOFF_TYPE,
     distance: f32,

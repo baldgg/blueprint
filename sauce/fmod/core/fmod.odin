@@ -1,4 +1,3 @@
-#+build windows
 package fmod_core
 
 // ========================================================================================
@@ -19,6 +18,20 @@ when ODIN_OS == .Windows {
         foreign import lib "lib/windows/x64/fmodL_vc.lib"
     } else {
         foreign import lib "lib/windows/x64/fmod_vc.lib"
+    }
+}
+when ODIN_OS == .Darwin {
+    when LOGGING_ENABLED {
+        foreign import lib "lib/darwin/libfmodL.dylib"
+    } else {
+        foreign import lib "lib/darwin/libfmod.dylib"
+    }
+}
+when ODIN_OS == .Linux {
+    when LOGGING_ENABLED {
+        foreign import lib "lib/linux/libfmodL.so"
+    } else {
+        foreign import lib "lib/linux/libfmod.so"
     }
 }
 

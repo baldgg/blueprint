@@ -25,7 +25,7 @@ import sg "sokol/gfx"
 import sglue "sokol/glue"
 import slog "sokol/log"
 
-import win32 "core:sys/windows" // wait, how is this building on mac?
+import win32 "core:sys/windows" // wait, how is this building on mac? even more so, how is this building on linux?D:
 
 Core_Context :: struct {
 	gs: ^Game_State,

@@ -1,4 +1,3 @@
-#+build windows
 package fmod_core
 
 /* ======================================================================================== */
@@ -667,7 +666,7 @@ PORT_TYPE :: enum i32 {
 // FMOD callbacks
 //
 
-DEBUG_CALLBACK :: #type proc "stdcall" (
+DEBUG_CALLBACK :: #type proc "cdecl" (
     flags: DEBUG_FLAGS,
     file: cstring,
     line: i32,
@@ -675,7 +674,7 @@ DEBUG_CALLBACK :: #type proc "stdcall" (
     message: cstring,
 ) -> RESULT
 
-SYSTEM_CALLBACK :: #type proc "stdcall" (
+SYSTEM_CALLBACK :: #type proc "cdecl" (
     system: ^SYSTEM,
     type: SYSTEM_CALLBACK_TYPE,
     commanddata1: rawptr,
@@ -683,7 +682,7 @@ SYSTEM_CALLBACK :: #type proc "stdcall" (
     userdata: rawptr,
 ) -> RESULT
 
-CHANNELCONTROL_CALLBACK :: proc "stdcall" (
+CHANNELCONTROL_CALLBACK :: proc "cdecl" (
     channelcontrol: ^CHANNELCONTROL,
     controltype: CHANNELCONTROL_TYPE,
     callbacktype: CHANNELCONTROL_CALLBACK_TYPE,
@@ -691,27 +690,27 @@ CHANNELCONTROL_CALLBACK :: proc "stdcall" (
     commanddata2: rawptr,
 ) -> RESULT
 
-DSP_CALLBACK :: #type proc "stdcall" (dsp: ^DSP, type: DSP_CALLBACK_TYPE, data: rawptr) -> RESULT
-SOUND_NONBLOCK_CALLBACK :: #type proc "stdcall" (sound: ^SOUND, result: RESULT) -> RESULT
-SOUND_PCMREAD_CALLBACK :: #type proc "stdcall" (sound: ^SOUND, data: rawptr, datalen: u32) -> RESULT
+DSP_CALLBACK :: #type proc "cdecl" (dsp: ^DSP, type: DSP_CALLBACK_TYPE, data: rawptr) -> RESULT
+SOUND_NONBLOCK_CALLBACK :: #type proc "cdecl" (sound: ^SOUND, result: RESULT) -> RESULT
+SOUND_PCMREAD_CALLBACK :: #type proc "cdecl" (sound: ^SOUND, data: rawptr, datalen: u32) -> RESULT
 
-SOUND_PCMSETPOS_CALLBACK :: #type proc "stdcall" (
+SOUND_PCMSETPOS_CALLBACK :: #type proc "cdecl" (
     sound: ^SOUND,
     subsound: i32,
     position: u32,
     postype: TIMEUNIT,
 ) -> RESULT
 
-FILE_OPEN_CALLBACK :: #type proc "stdcall" (
+FILE_OPEN_CALLBACK :: #type proc "cdecl" (
     name: cstring,
     filesize: ^u32,
     handle: ^rawptr,
     userdata: rawptr,
 ) -> RESULT
 
-FILE_CLOSE_CALLBACK :: #type proc "stdcall" (handle: rawptr, userdata: rawptr) -> RESULT
+FILE_CLOSE_CALLBACK :: #type proc "cdecl" (handle: rawptr, userdata: rawptr) -> RESULT
 
-FILE_READ_CALLBACK :: #type proc "stdcall" (
+FILE_READ_CALLBACK :: #type proc "cdecl" (
     handle: rawptr,
     buffer: rawptr,
     sizebytes: u32,
@@ -719,22 +718,22 @@ FILE_READ_CALLBACK :: #type proc "stdcall" (
     userdata: rawptr,
 ) -> RESULT
 
-FILE_SEEK_CALLBACK :: #type proc "stdcall" (handle: rawptr, pos: u32, userdata: rawptr) -> RESULT
-FILE_ASYNCREAD_CALLBACK :: #type proc "stdcall" (info: ^ASYNCREADINFO, userdata: rawptr) -> RESULT
-FILE_ASYNCCANCEL_CALLBACK :: #type proc "stdcall" (info: ^ASYNCREADINFO, userdata: rawptr) -> RESULT
+FILE_SEEK_CALLBACK :: #type proc "cdecl" (handle: rawptr, pos: u32, userdata: rawptr) -> RESULT
+FILE_ASYNCREAD_CALLBACK :: #type proc "cdecl" (info: ^ASYNCREADINFO, userdata: rawptr) -> RESULT
+FILE_ASYNCCANCEL_CALLBACK :: #type proc "cdecl" (info: ^ASYNCREADINFO, userdata: rawptr) -> RESULT
 
-FILE_ASYNCDONE_FUNC :: #type proc "stdcall" (info: ^ASYNCREADINFO, result: RESULT)
-MEMORY_ALLOC_CALLBACK :: #type proc "stdcall" (size: u32, _type: MEMORY_TYPE, sourcestr: cstring)
+FILE_ASYNCDONE_FUNC :: #type proc "cdecl" (info: ^ASYNCREADINFO, result: RESULT)
+MEMORY_ALLOC_CALLBACK :: #type proc "cdecl" (size: u32, _type: MEMORY_TYPE, sourcestr: cstring)
 
-MEMORY_REALLOC_CALLBACK :: #type proc "stdcall" (
+MEMORY_REALLOC_CALLBACK :: #type proc "cdecl" (
     ptr: rawptr,
     size: u32,
     _type: MEMORY_TYPE,
     sourcestr: cstring,
 )
 
-MEMORY_FREE_CALLBACK :: #type proc "stdcall" (ptr: rawptr, _type: MEMORY_TYPE, sourcestr: cstring)
-_3D_ROLLOFF_CALLBACK :: #type proc "stdcall" (channelcontrol: ^CHANNELCONTROL, distance: f32) -> f32
+MEMORY_FREE_CALLBACK :: #type proc "cdecl" (ptr: rawptr, _type: MEMORY_TYPE, sourcestr: cstring)
+_3D_ROLLOFF_CALLBACK :: #type proc "cdecl" (channelcontrol: ^CHANNELCONTROL, distance: f32) -> f32
 
 
 
